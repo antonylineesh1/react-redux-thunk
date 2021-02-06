@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PostCard from "./PostCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getPosts } from './../../actions/postAction';
 
 const Posts = () => {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.post.posts);
+
+  useEffect(() => {
+    if (posts && posts.length === 0) {
+      dispatch(getPosts())
+    }
+  }, [posts, dispatch])
+
+
 
   return (
     <div className="row">
       {posts.map((postItem) => (
-        <PostCard postItem={postItem} />
+        <PostCard key={postItem.id} postItem={postItem} />
       ))}
     </div>
   );

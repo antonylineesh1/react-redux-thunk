@@ -13,7 +13,6 @@ const AddPost = () => {
   const submitForm = (e) => {
     e.preventDefault();
     const new_post = {
-      id: shortid.generate(),
       title: title,
       body: body,
     };
